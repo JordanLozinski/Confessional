@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn;
+using Yarn.Unity;
 
 // TODO: Presumably we want to be able to offer a choice of what to say at certain parts of a dialog. 
 
@@ -25,7 +27,7 @@ enum DialogState
 // Yarn text effect tags
 // Voice synthesis
 
-public class Dialog : MonoBehaviour{
+public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 
 	// If we want text effects, seems like TextMeshPro might be a place to start
 	public Text textDisplay;
@@ -52,83 +54,147 @@ public class Dialog : MonoBehaviour{
 	// Optional game object: Some kind of chevron (>>) at the bottom of the text display that indicates when the text is completely rolled out
 	public GameObject continuePrompt;
 
+
+
 	void Awake() {
 		if (dialogueContainer != null)
 			dialogueContainer.SetActive(false);
+
+		foreach (var button in optionButtons) {
+			button.gameObject.SetActive (false);
+		}
 		
 		// TODO: May have to set text object and button objects to inactive as well
 	}
 
 
 	// Call this when you want to begin displaying the first paragraph.
-	public override IEnumerator DialogueStarted()
+	public override void DialogueStarted()
 	{
 		// TODO: Have this object own all the UI assets associated with this dialog
-		index = 0;
-		thread = Type();
-		StartCoroutine(thread);
-		yield break;
+		dialogueContainer.SetActive(true);
 	}
 
-	public override IEnumerator RunLine(Yarn.Line line)
+	public override void DialogueComplete()
 	{
-		
+		if (dialogueContainer != null)
+			dialogueContainer.SetActive(false);
 	}
 
-	public void Update()
+
+	public override Dialogue.HandlerExecutionType RunLine (Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onLineComplete)
 	{
-		if (Input.GetKeyDown(advanceDialogueKey))
+		// Start displaying the line; it will call onComplete later
+		// which will tell the dialogue to continue
+		StartCoroutine(DoRunLine(line, localisationProvider, onLineComplete));
+		return Dialogue.HandlerExecutionType.PauseExecution;
+	}
+
+	public override Dialogue.HandlerExecutionType RunCommand (Yarn.Command command, System.Action onCommandComplete) {
+		// Dispatch this command via the 'On Command' handler.
+		// onCommand?.Invoke(command.Text);
+
+		// Signal to the DialogueRunner that it should continue
+		// executing. (This implementation of RunCommand always signals
+		// that execution should continue, and never calls
+		// onCommandComplete.)
+		return Dialogue.HandlerExecutionType.ContinueExecution;
+	}
+
+	private IEnumerator DoRunLine(Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onComplete)
+	{
+		Debug.Log("Beta");
+		dialogueContainer.SetActive(true);
+		ds = DialogState.Rolling;
+		string text = localisationProvider.GetLocalisedTextForLine(line);
+		textDisplay.text = "";
+		foreach (char letter in text)
 		{
-			// TODO Add sounds for going through text
-			if (ds == DialogState.Rolling)
+			
+			textDisplay.text += letter;
+			if (!Input.GetKeyDown(advanceDialogueKey))
 			{
-				// Instead of rolling out the whole text, we could just make the text roll out faster.
-				// If you want that effect instead, replace the code in this block with this line:
-				// typingSpeed = 0.3f;
+				if (letter != ' ') yield return new WaitForSeconds(typingSpeed);
+			}
+			else
+			{
+				textDisplay.text = text;
+				break;
+			}
+		}
+		ds = DialogState.Rolled;
+
+		// Show the continue prompt, if we have one
+		// TODO: continue prompt
+
+		while (Input.GetKeyDown(advanceDialogueKey) == false)
+			yield return null;
+
+		yield return new WaitForEndOfFrame();
+
+		// Remove the continue prompt if we have one
 
 
-				// The coroutine will break out when it sees ds isn't Rolling
-				ds = DialogState.Rolled;
-				textDisplay.text = paragraphs[index];
-			}
-			else if (ds == DialogState.Rolled)
+		onComplete();
+	}
+
+	
+	public override void RunOptions (Yarn.OptionSet optionSet, ILineLocalisationProvider localisationProvider, System.Action<int> onOptionSelected) {
+		StartCoroutine(DoRunOptions(optionSet, localisationProvider, onOptionSelected));
+	}
+
+    private IEnumerator DoRunOptions (Yarn.OptionSet optionsCollection, ILineLocalisationProvider localisationProvider, System.Action<int> selectOption)
+	{
+		if (optionsCollection.Options.Length > optionButtons.Count)
+		{
+			Debug.LogWarning("There arent enough buttons for the amount of choices we need to display. This will cause problems");
+		}
+
+		int i = 0;
+		
+		ds = DialogState.Choices;
+
+		foreach (var optionString in optionsCollection.Options)
+		{
+			optionButtons[i].gameObject.SetActive(true);
+
+			optionButtons[i].onClick.RemoveAllListeners();
+			optionButtons[i].onClick.AddListener(() => SelectOption(optionString.ID));
+
+			var optionText = localisationProvider.GetLocalisedTextForLine(optionString.Line);
+
+			if (optionText == null)
 			{
-				// Advance paragraph
-				index++;
-				if (index < paragraphs.Length)
-				{
-					thread = Type();
-					StartCoroutine(thread);
-				}
-				else
-				{
-					// Dialog is over
-				}
+				Debug.LogWarning($"Option {optionString.Line.ID} doesn't have any localised text");
+                optionText = optionString.Line.ID;
 			}
+
+			var unityText = optionButtons [i].GetComponentInChildren<Text> ();
+			if (unityText != null) {
+				unityText.text = optionText;
+			}
+			i++;
+		}
+
+		while (ds == DialogState.Choices)
+		{
+			yield return null;
+		}
+		Debug.Log("Alpha");
+
+		// Hide all the buttons
+		foreach (var button in optionButtons)
+		{
+			button.gameObject.SetActive(false);
 		}
 	}
 
-	public override IEnumerator RunLine (Yarn.Line line)
+	public void SelectOption(int optionID)
 	{
-
-	}
-
-	public override IEnumerator RunOptions(Yarn.Options optionsCollection, Yarn.OptionChooser optionChooser)
-	{
-
-	}
-
-	// Roll out the text
-	IEnumerator Type()
-	{
-		ds = DialogState.Rolling;
-		textDisplay.text = "";
-		foreach(char letter in paragraphs[index].ToCharArray())
+		if (ds != DialogState.Choices)
 		{
-			yield return new WaitForSeconds(typingSpeed);	
-			// Escape the coroutine if DialogState isn't Rolling		
-			if (ds != DialogState.Rolling) yield break;
-			textDisplay.text += letter;
+			Debug.LogWarning("An option was selected, but the dialogue UI was not expecting it.");
+            return;
 		}
 		ds = DialogState.Rolled;
 	}

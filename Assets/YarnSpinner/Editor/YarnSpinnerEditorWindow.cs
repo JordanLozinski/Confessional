@@ -357,6 +357,7 @@ namespace Yarn.Unity
 
                 }
 
+                EditorGUIUtility.ExitGUI();
             }
         }
 
