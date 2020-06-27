@@ -1,29 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // TODO: Presumably we want to be able to offer a choice of what to say at certain parts of a dialog. 
 
 // State for our dialog box. 
 // Empty = no text displayed, Rolling = currently rolling out the text,
 // Rolled = text is fully rolled out
+// Choics = text is fully rolled out, and we are displaying some choice buttons to the player.
 enum DialogState
 {
 	Empty = 0,
 	Rolling = 1,
-	Rolled = 2
+	Rolled = 2,
+	Choices = 3
 }
 
 // Roadmap:
 // Yarn dialog at all working
 // Yarn choices working
 // Yarn text speed tags
+// Portraits
 // Yarn text effect tags
+// Voice synthesis
 
-public class Dialog : Yarn.Unity.DialogueUIBehaviour {
+public class Dialog : MonoBehaviour{
 
 	// If we want text effects, seems like TextMeshPro might be a place to start
 	public Text textDisplay;
+
+	// Option buttons
+	public List<Button> optionButtons;
 
 	// String for each text box worth of text. 
 	public string[] paragraphs;
@@ -39,14 +47,32 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	public string advanceDialogueKey = "x"; 
 	private IEnumerator thread = null;
 
+	public GameObject dialogueContainer;
+
+	// Optional game object: Some kind of chevron (>>) at the bottom of the text display that indicates when the text is completely rolled out
+	public GameObject continuePrompt;
+
+	void Awake() {
+		if (dialogueContainer != null)
+			dialogueContainer.SetActive(false);
+		
+		// TODO: May have to set text object and button objects to inactive as well
+	}
+
 
 	// Call this when you want to begin displaying the first paragraph.
-	public void BeginDialogue()
+	public override IEnumerator DialogueStarted()
 	{
 		// TODO: Have this object own all the UI assets associated with this dialog
 		index = 0;
 		thread = Type();
 		StartCoroutine(thread);
+		yield break;
+	}
+
+	public override IEnumerator RunLine(Yarn.Line line)
+	{
+		
 	}
 
 	public void Update()
@@ -69,7 +95,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 			{
 				// Advance paragraph
 				index++;
-				if (index < paragraphs.length)
+				if (index < paragraphs.Length)
 				{
 					thread = Type();
 					StartCoroutine(thread);
@@ -80,6 +106,16 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 				}
 			}
 		}
+	}
+
+	public override IEnumerator RunLine (Yarn.Line line)
+	{
+
+	}
+
+	public override IEnumerator RunOptions(Yarn.Options optionsCollection, Yarn.OptionChooser optionChooser)
+	{
+
 	}
 
 	// Roll out the text

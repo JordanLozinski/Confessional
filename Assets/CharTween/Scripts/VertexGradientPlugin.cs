@@ -18,6 +18,15 @@ namespace CharTween
 
         }
 
+        public override void SetFrom(TweenerCore<VertexGradient, VertexGradient, NoOptions> t, VertexGradient vg, bool isRelative)
+        {
+            var prevEndVal = t.endValue;
+            t.endValue = t.getter();
+            t.startValue = isRelative ? Add(t.endValue, prevEndVal) : prevEndVal;
+            t.startValue = prevEndVal;
+            t.setter(t.startValue);
+        }
+
         public override void SetFrom(TweenerCore<VertexGradient, VertexGradient, NoOptions> t, bool isRelative)
         {
             var prevEndVal = t.endValue;

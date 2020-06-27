@@ -1,0 +1,24 @@
+title: Example
+---
+Player: This is some example dialog.
+Player: [shake=0.05]I hope you know what you're doing.[/shake]
+[[Anything exciting happen last night?|Example2]]
+[[Are you okay?|Example3]]
+[[Pog||Example2]]
+===
+
+title: Example2
+---
+Player: Good job. 
+-> Just one choice option.
+    Player: Yep
+===
+
+title: Example3
+---
+Alice: What?
+-> Two choices.
+    Alice: Ok.
+-> Two choices!
+    Alice: Ok.
+===
