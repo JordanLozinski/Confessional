@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn;
@@ -20,12 +21,12 @@ enum DialogState
 }
 
 // Roadmap:
-// Yarn dialog at all working
-// Yarn choices working
-// Yarn text speed tags
-// Portraits
-// Yarn text effect tags
+// Yarn dialog at all working: DONE
+// Yarn choices working: DONE
+// Yarn text speed tags: DONE
+// Portraits: DONE
 // Voice synthesis
+// Yarn text effect tags
 
 public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 
@@ -35,28 +36,34 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	// Option buttons
 	public List<Button> optionButtons;
 
-	// String for each text box worth of text. 
-	public string[] paragraphs;
-
-	// Current index in paragraphs array
-	private int index = -1;
 
 	// Seconds per character 
 	public float typingSpeed = 0.1f;
 	private DialogState ds = DialogState.Empty;
 
+	Dictionary<string, CharacterData> characterDatas;
+
 	// TODO: Seems like it would be nice if we could also click through dialog
 	public string advanceDialogueKey = "x"; 
-	private IEnumerator thread = null;
 
 	public GameObject dialogueContainer;
 
 	// Optional game object: Some kind of chevron (>>) at the bottom of the text display that indicates when the text is completely rolled out
 	public GameObject continuePrompt;
 
+	CharacterData speaker;
+
+
 
 
 	void Awake() {
+		CharacterData[] cds = GameObject.Find("CharacterData").GetComponents<CharacterData>();
+		characterDatas = new Dictionary<string, CharacterData>();
+		foreach (CharacterData cd in cds)
+		{
+			characterDatas[cd.characterName] = cd;
+		}
+
 		if (dialogueContainer != null)
 			dialogueContainer.SetActive(false);
 
@@ -72,6 +79,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	public override void DialogueStarted()
 	{
 		// TODO: Have this object own all the UI assets associated with this dialog
+		Debug.Log("Dialogue started");
 		dialogueContainer.SetActive(true);
 	}
 
@@ -101,6 +109,24 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		return Dialogue.HandlerExecutionType.ContinueExecution;
 	}
 
+	private void tagHelper(string tag)
+	{
+		string[] tmp = tag.Split('=');
+		if (tmp.Length != 2)
+		{
+			Debug.LogWarning("This shouldnt happen lmao");
+		}
+		switch (tmp[0])
+		{
+			case "typingSpeed":
+				typingSpeed = float.Parse(tmp[1]);
+				break;
+			default:
+				Debug.LogWarning("This shouldn't happen either");
+				break;
+		}
+	}
+
 	private IEnumerator DoRunLine(Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onComplete)
 	{
 		Debug.Log("Beta");
@@ -108,9 +134,40 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		ds = DialogState.Rolling;
 		string text = localisationProvider.GetLocalisedTextForLine(line);
 		textDisplay.text = "";
+		int i = -1;
+
+		int tagStartIndex = -1;
+		var match = Regex.Match(text, "([A-z]+): ");
+		// Get portrait with the captured group
+		if (characterDatas.TryGetValue(match.Groups[1].Value, out speaker))
+		{
+			speaker.portraitUI.SetActive(true);
+		}
+		else
+		{
+			Debug.LogWarning("Couldnt find portrait for character named " + match.Groups[1].Value);
+		}
+
+		// Chop off the front of text
+		text = text.Substring(match.Length);
+
 		foreach (char letter in text)
 		{
-			
+			i++;
+			if (letter == '<') // We're looking at 
+			{
+				tagStartIndex = i;
+				
+			}
+			if (tagStartIndex != -1)
+			{
+				if (letter == '>')
+				{ 
+					tagHelper(text.Substring(tagStartIndex+1, i-tagStartIndex-1));
+					tagStartIndex = -1;
+				}
+				continue;
+			}
 			textDisplay.text += letter;
 			if (!Input.GetKeyDown(advanceDialogueKey))
 			{
@@ -132,6 +189,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 
 		yield return new WaitForEndOfFrame();
 
+		speaker.portraitUI.SetActive(false);
 		// Remove the continue prompt if we have one
 
 
@@ -154,12 +212,13 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		
 		ds = DialogState.Choices;
 
+		speaker.portraitUI.SetActive(true);
 		foreach (var optionString in optionsCollection.Options)
 		{
 			optionButtons[i].gameObject.SetActive(true);
 
 			optionButtons[i].onClick.RemoveAllListeners();
-			optionButtons[i].onClick.AddListener(() => SelectOption(optionString.ID));
+			optionButtons[i].onClick.AddListener(() => SelectOption(optionString.ID, selectOption));
 
 			var optionText = localisationProvider.GetLocalisedTextForLine(optionString.Line);
 
@@ -182,6 +241,9 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		}
 		Debug.Log("Alpha");
 
+		// TODO: THIS SEEMS KINDA SKETCH
+		// speaker.portraitUI.SetActive(false);
+
 		// Hide all the buttons
 		foreach (var button in optionButtons)
 		{
@@ -189,7 +251,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		}
 	}
 
-	public void SelectOption(int optionID)
+	public void SelectOption(int optionID, System.Action<int> optionSelectHandler)
 	{
 		if (ds != DialogState.Choices)
 		{
@@ -197,5 +259,6 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
             return;
 		}
 		ds = DialogState.Rolled;
+		optionSelectHandler?.Invoke(optionID);
 	}
 }
