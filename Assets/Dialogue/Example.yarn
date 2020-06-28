@@ -1,6 +1,6 @@
 title: Example
 ---
-Player: <typingSpeed=0.4>This....<typingSpeed=0.03> is some example dialog. #line:0516b12
+Player: <typingSpeed=0.2>This....<typingSpeed=0.03> is some example dialog. #line:0516b12
 Player: I hope you know what you're doing. #line:01c21af
 [[Anything exciting happen last night?|Example2]] #line:005fc2b
 [[Are you okay?|Example3]] #line:0881b3f
@@ -16,9 +16,11 @@ Player: Good job.  #line:0a8c639
 
 title: Example3
 ---
-Alice: What? #line:034a2ba
+Player: What? #line:034a2ba
 -> Two choices. #line:0b65730
-    Alice: Ok. #line:0b723e7
+    <<takenote Notebook Sour>>
+    Player: Ok. #line:0b723e7
 -> Two choices! #line:07b41f7
-    Alice: Ok. #line:03eb16e
+    <<takenote Notebook Sweet>>
+    Player: Ok. #line:03eb16e
 ===

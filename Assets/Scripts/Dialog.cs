@@ -36,10 +36,12 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	// Option buttons
 	public List<Button> optionButtons;
 
-
+	const float TEXT_ADVANCE_LOCKOUT = 0.3f;
+	const float DEFAULT_TYPING_SPEED = 0.03f;
 	// Seconds per character 
-	public float typingSpeed = 0.1f;
+	public float typingSpeed = DEFAULT_TYPING_SPEED;
 	private DialogState ds = DialogState.Empty;
+	private float timeSinceSkipRolling = -4.5f;
 
 	Dictionary<string, CharacterData> characterDatas;
 
@@ -52,9 +54,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	public GameObject continuePrompt;
 
 	CharacterData speaker;
-
-
-
+	bool skipRolling = false;
 
 	void Awake() {
 		CharacterData[] cds = GameObject.Find("CharacterData").GetComponents<CharacterData>();
@@ -127,6 +127,14 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		}
 	}
 
+	void Update() {
+		if (Input.GetKeyDown(advanceDialogueKey) && skipRolling == false && ds == DialogState.Rolling)
+		{
+			skipRolling = true;
+			timeSinceSkipRolling = Time.time;
+		}
+	}
+
 	private IEnumerator DoRunLine(Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onComplete)
 	{
 		Debug.Log("Beta");
@@ -150,7 +158,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 
 		// Chop off the front of text
 		text = text.Substring(match.Length);
-
+		typingSpeed = DEFAULT_TYPING_SPEED;
 		foreach (char letter in text)
 		{
 			i++;
@@ -169,22 +177,19 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 				continue;
 			}
 			textDisplay.text += letter;
-			if (!Input.GetKeyDown(advanceDialogueKey))
+			if (!skipRolling)
 			{
 				if (letter != ' ') yield return new WaitForSeconds(typingSpeed);
 			}
-			else
-			{
-				textDisplay.text = text;
-				break;
-			}
 		}
+		skipRolling = false;
 		ds = DialogState.Rolled;
 
 		// Show the continue prompt, if we have one
 		// TODO: continue prompt
 
-		while (Input.GetKeyDown(advanceDialogueKey) == false)
+		Debug.Log(Time.time - timeSinceSkipRolling);
+		while (!Input.GetKeyDown(advanceDialogueKey) || (Time.time - timeSinceSkipRolling < TEXT_ADVANCE_LOCKOUT))
 			yield return null;
 
 		yield return new WaitForEndOfFrame();
