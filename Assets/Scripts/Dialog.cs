@@ -53,6 +53,9 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	// Optional game object: Some kind of chevron (>>) at the bottom of the text display that indicates when the text is completely rolled out
 	public GameObject continuePrompt;
 
+	// Populate w/ name when non-Player talks
+	public GameObject nameplate;
+
 	CharacterData speaker;
 	bool skipRolling = false;
 

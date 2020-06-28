@@ -1,0 +1,23 @@
+title: Day1
+---
+<<set $spouse to Alice>>
+{$spouse}: Bless me Father, for I have sinned. It has been a week since my last confession.
+Player: 
+{$spouse}: Father, you sound different today. 
+Player: I seem to have caught a throat bug. Don't worry about me though.
+{$spouse}: 
+
+<<revealname CharacterData {$spouse}>>
+
+[[Check out the lake|Day1Lake]]
+[[Check out {$victim_name}'s house|Day1House]]
+===
+
+title: Day1Lake
+---
+Player: 
+===
+
+title: Day1House
+---
+===
