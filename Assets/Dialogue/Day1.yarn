@@ -1,23 +1,53 @@
 title: Day1
 ---
-<<set $spouse to Alice>>
-{$spouse}: Bless me Father, for I have sinned. It has been a week since my last confession.
-Player: 
-{$spouse}: Father, you sound different today. 
-Player: I seem to have caught a throat bug. Don't worry about me though.
-{$spouse}: 
-
-<<revealname CharacterData {$spouse}>>
-
-[[Check out the lake|Day1Lake]]
-[[Check out {$victim_name}'s house|Day1House]]
+Spouse: Forgive me Father, for I have sinned. It has been three weeks since my last confession. #line:0905fce
+<<set $victim to "Charlie">>
+Spouse: I wanted to say thank you for last week. *sniffle* For giving my {$victim} ~typingSpeed=0.15`a - a~typingSpeed=0.03` beautiful service. #line:089ac15
+<<revealname CharacterData Spouse>>
+-> He was a good man. #line:098a8d6
+-> He's with the Lord now. #line:0a162dc
+-> Take your time. #line:0cd1f87
+Spouse: You - *sniff* - you sound different, father. #line:0045fc3
+-> <s>That's because I'm not the Father.</s> #line:016c762
+-> (Lie) It's just a sore throat. #line:08314a2
+Player: It's just a sore throat. #line:05d033c
+Spouse: I'm sorry. #line:029fc49
+Spouse: The night he drowned, before he went out to the bar. I told him not to drink too much.  #line:00a4135
+Spouse: He - he promised he was going to come home afterwards. And~typingSpeed=0.1`...~typingSpeed=0.03` I fell asleep. #line:0fcd9fe
+Spouse: When I woke up, he was <color=&808080>gone<color=&000000>. #line:047d053
+-> That's not your fault. #line:0437c3f
+    Spouse: I don't know. He was stressed out, but he didn't want to talk about why. #line:0ab7c8c
+-> Did you have a good relationship? #line:062a3f9
+    Spouse: We had been married for eight years. Right here in this chapel.  #line:028f071
+    Spouse: But in the last month or so... he was stressed out. He didn't want to talk about it. #line:04aa80c
+-> Did he have a drinking problem? #line:0d81adc
+    Spouse: No. That's not him. He liked to drink, sure. #line:01c179b
+    Spouse: There were~typingSpeed=0.12`... ti~typingSpeed=0.1`mes~typingSpeed=0.03` when he drank too much. #line:0c979d5
+    Spouse: The last month or so, he was stressed out. He didn't want to talk about it. #line:0a44bb3
+Spouse: Maybe he didn't want to be around me when I was <color=&ff0000>nagging<color=&000000> him. #line:058ec1f
+Spouse: So he went to the lake and he-~typingSpeed=.15` he... #line:0991050
+-> You didn't do anything wrong. #line:00b2722
+    Spouse: If you really think so, Father. That helps. Thank you. #line:0b16c0d
+-> Say ten Hail Marys and you'll be forgiven. #line:095da3b
+    Spouse: Bless you, Father. Thank you. #line:041df4d
+-> Can you tell me anything more? #line:03bd308
+    Spouse: I'm sorry, Father. It's~typingSpeed=0.15`...~typingSpeed=0.03` too much to talk about. #line:03cf515
+[[This drowning sounds suspicious (Investigate lake)|Day1Lake]] #line:07f12f2
+[[This {$victim} guy sounds suspicious (Investigate his house)|Day1House]] #line:0a36d04
 ===
 
 title: Day1Lake
 ---
-Player: 
+<<takenote Notebook The lake is a small, scummy pond. Bad for a night swim. Approx. one mile from victim's house.>>
+Notebook: <font="Mansalva-Regular SDF">The lake is a small, scummy pond. Bad for a night swim. Approx. one mile from victim's house.</font> #line:062ff94
+<<transition GameManager Day 2>>
+[[Day2]]
 ===
 
 title: Day1House
 ---
+<<takenote Notebook Snuck into victim's house. Found invoice for expensive lawyer, dated one month ago. Legal worries? Thought he could get sued?>>
+Notebook: <font="Mansalva-Regular SDF">Snuck into victim's house. Found invoice for expensive lawyer, dated one month ago. Legal worries? Thought he could get sued?</font> #line:0347f30
+<<transition GameManager Day 2>>
+[[Day2]]
 ===

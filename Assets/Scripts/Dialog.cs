@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Yarn;
 using Yarn.Unity;
+using TMPro;
 
 // TODO: Presumably we want to be able to offer a choice of what to say at certain parts of a dialog. 
 
@@ -31,7 +32,7 @@ enum DialogState
 public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 
 	// If we want text effects, seems like TextMeshPro might be a place to start
-	public Text textDisplay;
+	public TextMeshProUGUI textDisplay;
 
 	// Option buttons
 	public List<Button> optionButtons;
@@ -144,11 +145,17 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		dialogueContainer.SetActive(true);
 		ds = DialogState.Rolling;
 		string text = localisationProvider.GetLocalisedTextForLine(line);
+		// Yarn Spinner doesnt let you escape certain characters so we need to do workarounds like this :/
+		text = Regex.Replace(text, "&", "#");
+
 		textDisplay.text = "";
 		int i = -1;
-
 		int tagStartIndex = -1;
+		int styleTagStartIndex = -1;
 		var match = Regex.Match(text, "([A-z]+): ");
+		// Disable previous speaker's portrait.
+		if (speaker != null)
+			speaker.portraitUI.SetActive(false);
 		// Get portrait with the captured group
 		if (characterDatas.TryGetValue(match.Groups[1].Value, out speaker))
 		{
@@ -165,14 +172,22 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		foreach (char letter in text)
 		{
 			i++;
-			if (letter == '<') // We're looking at 
+			if (letter == '<')
+			{
+				styleTagStartIndex = i;
+			}
+			if (letter == '>')
+			{
+				styleTagStartIndex = -1;
+			}
+			if (letter == '~') // We're looking at 
 			{
 				tagStartIndex = i;
 				
 			}
 			if (tagStartIndex != -1)
 			{
-				if (letter == '>')
+				if (letter == '`')
 				{ 
 					tagHelper(text.Substring(tagStartIndex+1, i-tagStartIndex-1));
 					tagStartIndex = -1;
@@ -180,9 +195,13 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 				continue;
 			}
 			textDisplay.text += letter;
+			if ("aeiouyAEIOUY".IndexOf(letter) == -1)
+			{
+				//play a voice synthesis sound
+			}
 			if (!skipRolling)
 			{
-				if (letter != ' ') yield return new WaitForSeconds(typingSpeed);
+				if (letter != ' ' && styleTagStartIndex == -1) yield return new WaitForSeconds(typingSpeed);
 			}
 		}
 		skipRolling = false;
@@ -236,7 +255,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
                 optionText = optionString.Line.ID;
 			}
 
-			var unityText = optionButtons [i].GetComponentInChildren<Text> ();
+			var unityText = optionButtons [i].GetComponentInChildren<TextMeshProUGUI> ();
 			if (unityText != null) {
 				unityText.text = optionText;
 			}

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 557d3ae60da2e23c3b7bbe9f53de7f06
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs:
+  - Day2-Day2-0
+  - Day2-Day2-1
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 'Error on line 7 at position 14:token recognition error
+    at: ''$|''
+
+'
+  baseLanguage: {fileID: 7128917941130120860, guid: 557d3ae60da2e23c3b7bbe9f53de7f06,
+    type: 3}
+  localizations: []

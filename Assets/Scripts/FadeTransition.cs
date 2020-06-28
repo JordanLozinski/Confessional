@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn;
+using Yarn.Unity;
 
 public class FadeTransition : MonoBehaviour
 {
     public GameObject fadeImage;
     private Text childText;
 
+    [YarnCommand("transition")]
     public void DoSceneTransition(string textToDisplay)
     {
         childText = fadeImage.GetComponentsInChildren<Text>()[0];

@@ -1,10 +1,7 @@
 title: Day2
 ---
-{$friend}: Bless me Father, for I have sinned. It has been a week since my last confession.
-Player: 
-
-[[Look into |Example2]]
-[[Check out {$|Example2]]
+{$friend}: Bless me Father, for I have sinned. It has been a week since my last confession. #line:08cc2e3
+Player: Dang wasup? #line:05bb15d
 ===
 
 title: Day2Killing

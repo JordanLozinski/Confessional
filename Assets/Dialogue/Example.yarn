@@ -1,6 +1,6 @@
 title: Example
 ---
-Player: <typingSpeed=0.2>This....<typingSpeed=0.03> is some example dialog. #line:0516b12
+Player: ~typingSpeed=0.2`This....~typingSpeed=0.03` is some example dialog. #line:0516b12
 Player: I hope you know what you're doing. #line:01c21af
 [[Anything exciting happen last night?|Example2]] #line:005fc2b
 [[Are you okay?|Example3]] #line:0881b3f
