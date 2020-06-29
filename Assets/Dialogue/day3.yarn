@@ -1,0 +1,112 @@
+title: Day3
+---
+Levi: Forgive me, Father, for I have sinned. Been two months since my last confession.
+Levi: I’ll say it’s been hard to convince myself to come in here.
+Levi: Thought God was supposed to open a door when he closes a window, or what have you.
+Levi: But I can’t see a good reason for Him to take my leg. And now I can’t work, or even… I don’t know.
+<<revealname CharacterData Levi>>
+
+-> You’re Levi?
+	Levi: Course I am. Thought you would recognize me.
+	Levi: Guess I shouldn’t be surprised if I sound different now.
+-> You mean the tractor accident?
+	Levi: Don’t think I’ve lost a leg any other way. Ha.
+-> God works in mysterious ways.
+	Levi: Guess so.
+
+-> Did you kill Charlie?
+	Levi: ...
+	Levi: The hell are you talking about?
+	[[DumpEvidence]]
+-> Did Charlie deserve it?
+	Levi: ...
+	Levi: Strange question to be asking.
+	Levi: Supposed to be that only God is making those kinda decisions. In your line of work.
+	Levi: If it were up to me, though? Yeah, he deserved it.
+	[[DeserveItQuestions]]
+===
+
+title: DumpEvidenceABC
+---
+-> You left <bar> just after him, that night.
+	[[DumpEvidenceBC]]
+-> He drowned in a pond far from his house.
+	[[DumpEvidenceAC]]
+-> He sold you the tractor that took off your leg.
+	[[DumpEvidenceAB]]
+===
+
+title: DumpEvidenceBC
+---
+-> He drowned in a pond far from his house.
+	[[DumpEvidenceC]]
+-> He sold you the tractor that took off your leg.
+	[[DumpEvidenceB]]
+===
+
+title: DumpEvidenceAC
+---
+-> You left <bar> just after him, that night.
+	[[DumpEvidenceC]]
+-> He sold you the tractor that took off your leg.
+	[[DumpEvidenceA]]
+===
+
+title: DumpEvidenceAB
+---
+-> You left <bar> just after him, that night.
+	[[DumpEvidenceB]]
+-> He drowned in a pond far from his house.
+	[[DumpEvidenceA]]
+===
+
+title: DumpEvidenceA
+---
+-> You left <bar> just after him, that night.
+	[[FinishedEvidence]
+===
+
+title: DumpEvidenceB
+---
+-> He drowned in a pond far from his house.
+	[[FinishedEvidence]
+===
+
+title: DumpEvidenceC
+---
+-> He sold you the tractor that took off your leg.
+	[[FinishedEvidence]
+===
+
+title: FinishedEvidence
+---
+Levi: I don’t know what the fuck you’re talking about. 
+Levi: What kind of conspiracy theory shit is this? I’m - I’m leaving.
+<<finale GameManager>>
+===
+
+title: DeserveItQuestions
+---
+-> He knew the tractor was defective.
+-> This is about revenge.
+Levi: I don’t know who you are. You’re not the Father.
+Levi: You are right about that, though. Charlie had to know the tractor was no good. Sold it to me anyway, of course.
+Levi: Wanna know the worst part about it? I was gonna buy it for twice what he sold it for. Had to talk me down on the price.
+Levi: Must’ve felt guilty about it. But not guilty enough to stop him from selling me a fucking death machine, I guess.
+
+-> And you killed him for it?
+	Levi: ...
+	Levi: You don't know anything. You aren't God.
+	Levi: I’m going to leave now.
+	<<finale GameManager>>
+-> You’re scum.
+	Levi: You going to do something about it? This isn’t evidence.
+	Levi: And I don’t know what you’re doing in a confession booth, but you’re not the Father.
+	Levi: I’m leaving.
+	<<finale GameManager>>
+-> You were justified.
+	Levi: ...
+	Levi: Maybe. I’d ask you what to do to attone. But you’re not a real priest, are you?
+	Levi: I’m going to go now.
+	<<finale GameManager>>
+===
