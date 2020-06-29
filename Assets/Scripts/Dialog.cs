@@ -152,7 +152,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		int i = -1;
 		int tagStartIndex = -1;
 		int styleTagStartIndex = -1;
-		var match = Regex.Match(text, "([A-z]+): ");
+		var match = Regex.Match(text, "([A-z ]+): ");
 
 		// Disable previous speaker's portrait.
 		if (speaker != null)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Yarn;
 using Yarn.Unity;
 
@@ -13,10 +14,21 @@ public class FadeTransition : MonoBehaviour
     [YarnCommand("transition")]
     public void DoSceneTransition(string[] textToDisplay)
     {
-        Debug.Log(textToDisplay);
         childText = fadeImage.GetComponentsInChildren<Text>()[0];
-        childText.text = textToDisplay[0];
+        childText.text = "";
+        foreach (string s in textToDisplay)
+        {
+            childText.text += s;
+            childText.text += " ";
+            Debug.Log("@@@" + s);
+        }
         StartCoroutine(FadeBetween());
+    }
+
+    [YarnCommand("finale")]
+    public void Finale()
+    {
+        SceneManager.LoadScene("final");
     }
 
     public IEnumerator FadeBetween()
