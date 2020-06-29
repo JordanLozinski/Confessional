@@ -11,6 +11,7 @@ public class Notebook : MonoBehaviour
     public List<string> lines;
     public GameObject notebookOverlay;
 
+    public int leaveNotebookFrame = 0;
     Button btn;
     Image image;
 
@@ -60,11 +61,12 @@ public class Notebook : MonoBehaviour
             text.text += "\n";
         }
 
-        while (!Input.anyKeyDown)
+        while (!Input.GetMouseButtonDown(0))
         {
             yield return null;
         }
 
+        leaveNotebookFrame = Time.frameCount;
         text.text = "";
         notebookOverlay.SetActive(false);
         btn.interactable = true;

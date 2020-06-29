@@ -132,11 +132,17 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	}
 
 	void Update() {
-		if (Input.anyKeyDown && skipRolling == false && ds == DialogState.Rolling)
+		if (Input.GetMouseButtonDown(0) && !MouseNearNotebook() && !Notebook.instance.notebookOverlay.activeSelf && skipRolling == false && ds == DialogState.Rolling)
 		{
 			skipRolling = true;
 			timeSinceSkipRolling = Time.time;
 		}
+	}
+
+	public static bool MouseNearNotebook()
+	{
+		Vector3 vec = Input.mousePosition;
+		return vec.x > 860 && vec.x < 990 && vec.y > 615 && vec.y < 750;
 	}
 
 	private IEnumerator DoRunLine(Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onComplete)
@@ -218,7 +224,8 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		// TODO: continue prompt
 
 		Debug.Log(Time.time - timeSinceSkipRolling);
-		while (!Input.anyKeyDown || (Time.time - timeSinceSkipRolling < TEXT_ADVANCE_LOCKOUT))
+		// Wait while they arent clicking or they are locked out 
+		while (!Input.GetMouseButtonDown(0) || MouseNearNotebook() || (Notebook.instance.leaveNotebookFrame == Time.frameCount) || (Time.time - timeSinceSkipRolling < TEXT_ADVANCE_LOCKOUT))
 			yield return null;
 
 		yield return new WaitForEndOfFrame();
