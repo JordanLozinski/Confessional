@@ -1,0 +1,72 @@
+fileFormatVersion: 2
+guid: a52a0546760d65c59909d24a3f43c5f0
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs:
+  - day3-Day3-0
+  - day3-Day3-1
+  - day3-Day3-2
+  - day3-Day3-3
+  - day3-Day3-4
+  - day3-Day3-5
+  - day3-Day3-6
+  - day3-Day3-7
+  - day3-Day3-8
+  - day3-Day3-9
+  - day3-Day3-10
+  - day3-Day3-11
+  - day3-Day3-12
+  - day3-Day3-13
+  - day3-Day3-14
+  - day3-Day3-15
+  - day3-Day3-16
+  - day3-Day3-17
+  - day3-Day3-18
+  - day3-DumpEvidenceABC-19
+  - day3-DumpEvidenceABC-20
+  - day3-DumpEvidenceABC-21
+  - day3-DumpEvidenceBC-22
+  - day3-DumpEvidenceBC-23
+  - day3-DumpEvidenceAC-24
+  - day3-DumpEvidenceAC-25
+  - day3-DumpEvidenceAB-26
+  - day3-DumpEvidenceAB-27
+  - day3-DumpEvidenceA-28
+  - day3-DumpEvidenceB-29
+  - day3-DumpEvidenceC-30
+  - day3-FinishedEvidence-31
+  - day3-FinishedEvidence-32
+  - day3-DeserveItQuestions-33
+  - day3-DeserveItQuestions-34
+  - day3-DeserveItQuestions-35
+  - day3-DeserveItQuestions-36
+  - day3-DeserveItQuestions-37
+  - day3-DeserveItQuestions-38
+  - day3-DeserveItQuestions-39
+  - day3-DeserveItQuestions-40
+  - day3-DeserveItQuestions-41
+  - day3-DeserveItQuestions-42
+  - day3-DeserveItQuestions-43
+  - day3-DeserveItQuestions-44
+  - day3-DeserveItQuestions-45
+  - day3-DeserveItQuestions-46
+  - day3-DeserveItQuestions-47
+  - day3-DeserveItQuestions-48
+  - day3-DeserveItQuestions-49
+  - day3-DeserveItQuestions-50
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 'Error on line 66 at position 20:token recognition error
+    at: '']\n''
+
+'
+  baseLanguage: {fileID: 7128917941130120860, guid: a52a0546760d65c59909d24a3f43c5f0,
+    type: 3}
+  localizations: []

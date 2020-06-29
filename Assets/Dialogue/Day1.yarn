@@ -12,7 +12,7 @@ Wife: You - *sniff* - you sound different, father. #line:0045fc3
 -> (Lie) It's just a sore throat. #line:08314a2
 Player: It's just a sore throat. #line:05d033c
 Wife: I'm sorry. #line:029fc49
-Wife: The night he drowned, before he went out to the bar. I told him not to drink too much.  #line:00a4135
+Wife: The night he drowned, before he went out to Kelly's. I told him not to drink too much.  #line:00a4135
 Wife: He - he promised he was going to come home afterwards. And~typingSpeed=0.1`...~typingSpeed=0.03` I fell asleep. #line:0fcd9fe
 Wife: When I woke up, he was <color=&808080>gone<color=&000000>. #line:047d053
 -> That's not your fault. #line:0437c3f
@@ -40,6 +40,7 @@ title: Day1Lake
 ---
 Notebook: <font="Mansalva-Regular SDF">The lake is a small, scummy pond. Bad for a night swim. Approx. one mile from victim's house.</font> #line:062ff94
 <<transition GameManager Day 2>>
+<<wait 3>>
 [[Day2]]
 ===
 
@@ -47,5 +48,6 @@ title: Day1House
 ---
 Notebook: <font="Mansalva-Regular SDF">Snuck into victim's house. Found invoice for expensive lawyer, dated one month ago. Legal worries? Thought he could get sued?</font> #line:0347f30
 <<transition GameManager Day 2>>
+<<wait 3>>
 [[Day2]]
 ===

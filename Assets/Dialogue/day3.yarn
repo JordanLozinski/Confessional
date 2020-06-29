@@ -1,112 +1,121 @@
 title: Day3
 ---
-Levi: Forgive me, Father, for I have sinned. Been two months since my last confession.
-Levi: I’ll say it’s been hard to convince myself to come in here.
-Levi: Thought God was supposed to open a door when he closes a window, or what have you.
-Levi: But I can’t see a good reason for Him to take my leg. And now I can’t work, or even… I don’t know.
+Levi: Forgive me, Father, for I have sinned. Been two months since my last confession. #line:097d451
+Levi: I’ll say it’s been hard to convince myself to come in here. #line:098ac17
+Levi: Thought God was supposed to open a door when he closes a window, or what have you. #line:05c3630
+Levi: But I can’t see a good reason for Him to take my leg. And now I can’t work, or even… I don’t know. #line:0e74dc2
 <<revealname CharacterData Levi>>
 
--> You’re Levi?
-	Levi: Course I am. Thought you would recognize me.
-	Levi: Guess I shouldn’t be surprised if I sound different now.
--> You mean the tractor accident?
-	Levi: Don’t think I’ve lost a leg any other way. Ha.
--> God works in mysterious ways.
-	Levi: Guess so.
+-> You’re Levi? #line:06c8558
+	Levi: Course I am. Thought you would recognize me. #line:055e5bd
+	Levi: Guess I shouldn’t be surprised if I sound different now. #line:08d9c1f
+-> You mean the tractor accident? #line:0383c8e
+	Levi: Don’t think I’ve lost a leg any other way. Ha. #line:01b3f17
+-> God works in mysterious ways. #line:05c8dfa
+	Levi: Guess so. #line:0d24c4e
 
--> Did you kill Charlie?
-	Levi: ...
-	Levi: The hell are you talking about?
-	[[DumpEvidence]]
--> Did Charlie deserve it?
-	Levi: ...
-	Levi: Strange question to be asking.
-	Levi: Supposed to be that only God is making those kinda decisions. In your line of work.
-	Levi: If it were up to me, though? Yeah, he deserved it.
+Levi: ...
+
+-> Did you kill Charlie? #line:0ed5b63
+	Levi: ... #line:0d81137
+	Levi: The hell are you talking about? #line:05e444f
+	[[DumpEvidenceABC]]
+-> Did Charlie deserve it? #line:06811d4
+	Levi: ... #line:064283e
+	Levi: Strange question to be asking. #line:0244e46
+	Levi: Supposed to be that only God is making those kinda decisions. In your line of work. #line:051e2f6
+	Levi: If it were up to me, though? Yeah, he deserved it. #line:0b80ee2
 	[[DeserveItQuestions]]
 ===
 
 title: DumpEvidenceABC
 ---
--> You left <bar> just after him, that night.
+Levi: ...
+-> You left Kelly's just after him, that night. #line:062821d
 	[[DumpEvidenceBC]]
--> He drowned in a pond far from his house.
+-> He drowned in a pond far from his house. #line:0387f60
 	[[DumpEvidenceAC]]
--> He sold you the tractor that took off your leg.
+-> He sold you the tractor that took off your leg. #line:0fc5982
 	[[DumpEvidenceAB]]
 ===
 
 title: DumpEvidenceBC
 ---
--> He drowned in a pond far from his house.
+Levi: ...
+-> He drowned in a pond far from his house. #line:0924685
 	[[DumpEvidenceC]]
--> He sold you the tractor that took off your leg.
+-> He sold you the tractor that took off your leg. #line:07b55b0
 	[[DumpEvidenceB]]
 ===
 
 title: DumpEvidenceAC
 ---
--> You left <bar> just after him, that night.
+Levi: ...
+-> You left Kelly's just after him, that night. #line:0a3a197
 	[[DumpEvidenceC]]
--> He sold you the tractor that took off your leg.
+-> He sold you the tractor that took off your leg. #line:0a53410
 	[[DumpEvidenceA]]
 ===
 
 title: DumpEvidenceAB
 ---
--> You left <bar> just after him, that night.
+Levi: ...
+-> You left Kelly's just after him, that night. #line:00ff08d
 	[[DumpEvidenceB]]
--> He drowned in a pond far from his house.
+-> He drowned in a pond far from his house. #line:0ede375
 	[[DumpEvidenceA]]
 ===
 
 title: DumpEvidenceA
 ---
--> You left <bar> just after him, that night.
-	[[FinishedEvidence]
+Levi: ...
+-> You left Kelly's just after him, that night. #line:03b1fe2
+	[[FinishedEvidence]]
 ===
 
 title: DumpEvidenceB
 ---
--> He drowned in a pond far from his house.
-	[[FinishedEvidence]
+Levi: ...
+-> He drowned in a pond far from his house. #line:097bc81
+	[[FinishedEvidence]]
 ===
 
 title: DumpEvidenceC
 ---
--> He sold you the tractor that took off your leg.
-	[[FinishedEvidence]
+Levi: ...
+-> He sold you the tractor that took off your leg. #line:0f59d35
+	[[FinishedEvidence]]
 ===
 
 title: FinishedEvidence
 ---
-Levi: I don’t know what the fuck you’re talking about. 
-Levi: What kind of conspiracy theory shit is this? I’m - I’m leaving.
+Levi: I don’t know what the fuck you’re talking about.  #line:0e77a8e
+Levi: What kind of conspiracy theory shit is this? I’m - I’m leaving. #line:0ef49a0
 <<finale GameManager>>
 ===
 
 title: DeserveItQuestions
 ---
--> He knew the tractor was defective.
--> This is about revenge.
-Levi: I don’t know who you are. You’re not the Father.
-Levi: You are right about that, though. Charlie had to know the tractor was no good. Sold it to me anyway, of course.
-Levi: Wanna know the worst part about it? I was gonna buy it for twice what he sold it for. Had to talk me down on the price.
-Levi: Must’ve felt guilty about it. But not guilty enough to stop him from selling me a fucking death machine, I guess.
+-> He knew the tractor was defective. #line:0d109ef
+-> This is about revenge. #line:048a656
+Levi: I don’t know who you are. You’re not the Father. #line:005a202
+Levi: You are right about that, though. Charlie had to know the tractor was no good. Sold it to me anyway, of course. #line:094deb7
+Levi: Wanna know the worst part about it? I was gonna buy it for twice what he sold it for. Had to talk me down on the price. #line:07832e7
+Levi: Must’ve felt guilty about it. But not guilty enough to stop him from selling me a fucking death machine, I guess. #line:0d0dfff
 
--> And you killed him for it?
-	Levi: ...
-	Levi: You don't know anything. You aren't God.
-	Levi: I’m going to leave now.
+-> And you killed him for it? #line:03745fa
+	Levi: ... #line:017e7ab
+	Levi: You don't know anything. You aren't God. #line:0b0fd4c
+	Levi: I’m going to leave now. #line:019cf9a
 	<<finale GameManager>>
--> You’re scum.
-	Levi: You going to do something about it? This isn’t evidence.
-	Levi: And I don’t know what you’re doing in a confession booth, but you’re not the Father.
-	Levi: I’m leaving.
+-> You’re scum. #line:057e371
+	Levi: You going to do something about it? This isn’t evidence. #line:0b11b89
+	Levi: And I don’t know what you’re doing in a confession booth, but you’re not the Father. #line:0f35a9d
+	Levi: I’m leaving. #line:0a9d6ec
 	<<finale GameManager>>
--> You were justified.
-	Levi: ...
-	Levi: Maybe. I’d ask you what to do to attone. But you’re not a real priest, are you?
-	Levi: I’m going to go now.
+-> You were justified. #line:05beee6
+	Levi: ... #line:075025a
+	Levi: Maybe. I’d ask you what to do to attone. But you’re not a real priest, are you? #line:0450fb2
+	Levi: I’m going to go now. #line:06244e9
 	<<finale GameManager>>
 ===

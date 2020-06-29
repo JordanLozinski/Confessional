@@ -132,7 +132,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(advanceDialogueKey) && skipRolling == false && ds == DialogState.Rolling)
+		if (Input.anyKeyDown && skipRolling == false && ds == DialogState.Rolling)
 		{
 			skipRolling = true;
 			timeSinceSkipRolling = Time.time;
@@ -218,7 +218,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		// TODO: continue prompt
 
 		Debug.Log(Time.time - timeSinceSkipRolling);
-		while (!Input.GetKeyDown(advanceDialogueKey) || (Time.time - timeSinceSkipRolling < TEXT_ADVANCE_LOCKOUT))
+		while (!Input.anyKeyDown || (Time.time - timeSinceSkipRolling < TEXT_ADVANCE_LOCKOUT))
 			yield return null;
 
 		yield return new WaitForEndOfFrame();

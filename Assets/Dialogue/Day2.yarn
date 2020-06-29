@@ -29,16 +29,17 @@ Notebook: Levi lost leg in tractor accident two months ago. Bought secondhand. #
 -> Are you here to confess or what? #line:0b38ff5
 	Jokester: I’m trying to, man. #line:06a6f55
 -> You should apologize to him, not me. #line:05f5ba6
-Player: He walked off before I could apologize. Then he left right after Charlie did.  #line:0ff1cd8
-Player: I stayed and had a couple more. Kinda forgot about it till now. #line:0b033c1
+Jokester: He walked off before I could apologize. Then he left right after Charlie did.  #line:0ff1cd8
+Jokester: I stayed and had a couple more. Kinda forgot about it till now. #line:0b033c1
 Notebook: Levi left right after Charlie. #line:01f11df
 
 -> Go apologize to him. #line:001024e
 	Jokester: I guess that’s what I knew I ought to do. Thanks, Father. #line:058a7ae
+	<<transition GameManager>>
 -> Say ten Hail Marys. #line:080f509
 	Jokester: Well, alright. I gotta remember the words first. #line:09fda79
-
-<<transition GameManager>>
+	<<transition GameManager>>
+<<wait 3>>
 
 Old Man: Father, you in there? #line:0ae3435
 -> Nope. #line:0cdcfa7
@@ -48,9 +49,10 @@ Old Man: Ah, there wasn’t any mass yesterday, so I wasn’t sure. You sound di
 <<revealname CharacterData Old Man>>
 -> <s>I’m not a priest. The real one is indisposed.</s> #line:0add506
 -> (Lie) I have a sore throat. That’s why there was no mass. #line:0042422
+Player: I have a sore throat. That's why there was no mass. 
 
 Old Man: Right. Father, I’m here on account of how I ran into Charlie last week. It was just before he died. #line:08ce4f8
-Old Man: I was going to <bar> when I bumped into him, and he got pretty upset with me. #line:030a1e0
+Old Man: I was going to Kelly's when I bumped into him, and he got pretty upset with me. #line:030a1e0
 Old Man: Now, I’d be lying if I said I liked Charlie. I’ve known him since he was a baby and he was a lot nicer back then. #line:0918b2b
 -> Was he like that to everyone? #line:0c71db9
 	Old Man: If he wants something out of you, he can be all nice and sociable.  #line:057d7fe
@@ -59,13 +61,12 @@ Old Man: Now, I’d be lying if I said I liked Charlie. I’ve known him since h
 	Old Man: He’s mean when he’s drunk on top of being mean when he’s sober. It doesn’t help that he gets drunk pretty often. #line:030fcd9
 
 Old Man: It’s not like I cross the street to avoid him, though. I even sold him a tractor not two months ago. #line:0775c9c
-
 -> So what happened? #line:0ad5c4f
 	Old Man: Seeing as he was drunk, I probably should’ve left him alone. We argued for a couple minutes before he walked off. #line:03f8667
-	Old Man: Then I went up to <bar>, and I ran into Levi outside. #line:001dbff
+	Old Man: Then I went up to Kelly's, and I ran into Levi outside. #line:001dbff
 -> Did Levi happen to walk by? #line:01297b2
-	Old Man: No, but I did run into him after I was done arguing with Charlie. He was just outside the door at <bar>. #line:0a56ca8
-
+	Old Man: No, but I did run into him after I was done arguing with Charlie. He was just outside the door at Kelly's. #line:0a56ca8
+Old Man: That was the end of it. #line:08b42a6
 -> You’re guilty that Charlie died right after that? #line:02a55ad
 	Old Man: I know it’s not my fault. A man’s got to be responsible for his own actions. #line:0b780a3
 	Old Man: But I do feel awful thinking that’s probably the last conversation he had before he died. #line:09ea537
@@ -81,7 +82,7 @@ Old Man: It’s not like I cross the street to avoid him, though. I even sold hi
 title: NoGuiltyOption
 ---
 -> Say ten Hail Marys and you’ll be forgiven. #line:088c6ef
-	Old Man: I suppose that’s not too high a price. I’ll do that, Father.\ #line:09a7038
+	Old Man: I suppose that’s not too high a price. I’ll do that, Father. #line:09a7038
 	[[InvestigationChoiceDay2]]
 -> You don’t need to feel guilty about that. #line:0ceedba
 	Old Man: It’s kind of you to say so, Father. I’ll just be on my way then. #line:083bdfe
@@ -96,14 +97,16 @@ title: InvestigationChoiceDay2
 
 title: Day2Bar
 ---
-Notebook: <font="Mansalva-Regular SDF">Talked to bartender at <Bar>. Says he saw Levi exit, wait outside for a few minutes, then leave.</font> #line:0958888
-<<transition GameManager Day 2>>
+Notebook: <font="Mansalva-Regular SDF">Talked to bartender at Kelly's. Says he saw Levi exit, wait outside for a few minutes, then leave.</font> #line:0958888
+<<transition GameManager Day 3>>
+<<wait 3>>
 [[Day3]]
 ===
 
 title: Day2Tractor
 ---
 Notebook: <font="Mansalva-Regular SDF">Found tractor serial number. Called John Deere, sales rep says they already denied my return. Charlie tried to return it, <u>knew it was defective?</u></font> #line:0a3d602
-<<transition GameManager Day 2>>
+<<transition GameManager Day 3>>
+<<wait 3>>
 [[Day3]]
 ===

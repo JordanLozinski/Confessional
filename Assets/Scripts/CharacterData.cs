@@ -13,9 +13,16 @@ public class CharacterData : MonoBehaviour
     // TODO: Voice data/params
 
     [YarnCommand("revealname")]
-    public void RevealName(string name)
+    public void RevealName(string[] name)
     {
-        if (name == characterName)
+        var sb = new System.Text.StringBuilder();
+        foreach (string s in name)
+        {
+            sb.Append(s);
+            sb.Append(" ");
+        }
+        var actualname = sb.ToString().Trim();
+        if (actualname == characterName)
         {
             portraitUI.GetComponentInChildren<Text>().text = characterName;
         }
