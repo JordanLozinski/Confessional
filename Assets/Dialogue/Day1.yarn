@@ -38,7 +38,6 @@ Spouse: So he went to the lake and he-~typingSpeed=.15` he... #line:0991050
 
 title: Day1Lake
 ---
-<<takenote Notebook The lake is a small, scummy pond. Bad for a night swim. Approx. one mile from victim's house.>>
 Notebook: <font="Mansalva-Regular SDF">The lake is a small, scummy pond. Bad for a night swim. Approx. one mile from victim's house.</font> #line:062ff94
 <<transition GameManager Day 2>>
 [[Day2]]
@@ -46,7 +45,6 @@ Notebook: <font="Mansalva-Regular SDF">The lake is a small, scummy pond. Bad for
 
 title: Day1House
 ---
-<<takenote Notebook Snuck into victim's house. Found invoice for expensive lawyer, dated one month ago. Legal worries? Thought he could get sued?>>
 Notebook: <font="Mansalva-Regular SDF">Snuck into victim's house. Found invoice for expensive lawyer, dated one month ago. Legal worries? Thought he could get sued?</font> #line:0347f30
 <<transition GameManager Day 2>>
 [[Day2]]

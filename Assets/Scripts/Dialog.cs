@@ -57,7 +57,7 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 	// Populate w/ name when non-Player talks
 	public GameObject nameplate;
 
-	CharacterData speaker;
+	CharacterData speaker = null;
 	bool skipRolling = false;
 
 	void Awake() {
@@ -153,9 +153,11 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 		int tagStartIndex = -1;
 		int styleTagStartIndex = -1;
 		var match = Regex.Match(text, "([A-z]+): ");
+
 		// Disable previous speaker's portrait.
 		if (speaker != null)
 			speaker.portraitUI.SetActive(false);
+
 		// Get portrait with the captured group
 		if (characterDatas.TryGetValue(match.Groups[1].Value, out speaker))
 		{
@@ -168,6 +170,11 @@ public class Dialog : Yarn.Unity.DialogueUIBehaviour {
 
 		// Chop off the front of text
 		text = text.Substring(match.Length);
+
+		if (match.Groups[1].Value == "Notebook")
+		{
+			Notebook.instance.TakeNote(text);
+		}
 		typingSpeed = DEFAULT_TYPING_SPEED;
 		foreach (char letter in text)
 		{

@@ -11,10 +11,11 @@ public class FadeTransition : MonoBehaviour
     private Text childText;
 
     [YarnCommand("transition")]
-    public void DoSceneTransition(string textToDisplay)
+    public void DoSceneTransition(string[] textToDisplay)
     {
+        Debug.Log(textToDisplay);
         childText = fadeImage.GetComponentsInChildren<Text>()[0];
-        childText.text = textToDisplay;
+        childText.text = textToDisplay[0];
         StartCoroutine(FadeBetween());
     }
 

@@ -1,5 +1,8 @@
 title: Example
 ---
+Notebook: Blah blah blah. #line:00e783d
+Notebook: <font="Mansalva-Regular SDF">The lake is a small, scummy pond. Bad for a night swim. Approx. one mile from victim's house.</font>  #line:0ffe47d
+Notebook: <font="Mansalva-Regular SDF">Snuck into victim's house. Found invoice for expensive lawyer, dated one month ago. Legal worries? Thought he could get sued?</font>  #line:0de9a42
 Player: ~typingSpeed=0.2`This....~typingSpeed=0.03` is some example dialog. #line:0516b12
 Player: I hope you know what you're doing. #line:01c21af
 [[Anything exciting happen last night?|Example2]] #line:005fc2b
