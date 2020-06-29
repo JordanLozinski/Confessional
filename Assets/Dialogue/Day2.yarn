@@ -1,13 +1,109 @@
 title: Day2
 ---
-{$friend}: Bless me Father, for I have sinned. It has been a week since my last confession. #line:08cc2e3
-Player: Dang wasup? #line:05bb15d
+Jokester: Hey. I don’t know how I’m supposed to kick this off.
+-> "Forgive me father, for I have sinned."
+-> Just tell me about your sins.
+
+Jokester: Right. Well. You can probably guess I knew Charlie. I guess everybody did, in a town like this.
+Jokester: I was at the bar when he died. Right before he died, I mean. Spooky shit.
+Jokester: Well, me and Levi were drinking and I guess I had one too many. I started poking fun at him.
+Jokester: Said something mean about his leg. And, y’know. How he got fat after that.
+<<revealname CharacterData Jokester>>
+
+-> Doesn’t sound very Jokesterly.
+	Jokester: Well, shoot. I thought it’d lighten the mood. 
+-> I don’t know Levi very well.
+	Jokester: I guess he doesn’t go to mass too often. Well, he used to be able to take a joke.
+-> What did he say?
+	Jokester: Well, he was pretty pissed off at me. I guess I crossed the line.
+Jokester: I heard of tractors taking your leg off, but he went and lost his sense of humor too.
+
+-> He lost his leg to a tractor?
+	Jokester: Shit, I thought even you would’ve heard. Happened two months ago.
+	Jokester: Guess that’s what happens when you buy secondhand.
+-> How does that happen?
+	Jokester: Guess that’s what happens when you buy secondhand.
+	Jokester: Happened two months ago and he’s been moping around ever since.
+Notebook: Levi lost leg in tractor accident two months ago. Bought secondhand.
+
+-> Are you here to confess or what?
+	Jokester: I’m trying to, man.
+-> You should apologize to him, not me.
+He walked off before I could apologize. Then he left right after Charlie did. 
+I stayed and had a couple more. Kinda forgot about it till now.
+Notebook: Levi left right after Charlie.
+
+-> Go apologize to him.
+	Jokester: I guess that’s what I knew I ought to do. Thanks, Father.
+-> Say ten Hail Marys.
+	Jokester: Well, alright. I gotta remember the words first.
+
+<<transition GameManager "">>
+
+Old Man: Father, you in there?
+-> Nope.
+-> I am.
+
+Old Man: Ah, there wasn’t any mass yesterday, so I wasn’t sure. You sound different.
+<<revealname CharacterData Old Man>>
+-> <s>I’m not a priest. The real one is indisposed.</s>
+-> (Lie) I have a sore throat. That’s why there was no mass.
+
+Old Man: Right. Father, I’m here on account of how I ran into Charlie last week. It was just before he died.
+Old Man: I was going to <bar> when I bumped into him, and he got pretty upset with me.
+Old Man: Now, I’d be lying if I said I liked Charlie. I’ve known him since he was a baby and he was a lot nicer back then.
+-> Was he like that to everyone?
+	Old Man: If he wants something out of you, he can be all nice and sociable. 
+	Old Man: So he was a manipulative bastard at best. And he was, well, worse than that when you caught him at the wrong time.
+-> Is he just a mean drunk?
+	Old Man: He’s mean when he’s drunk on top of being mean when he’s sober. It doesn’t help that he gets drunk pretty often.
+
+Old Man: It’s not like I cross the street to avoid him, though. I even sold him a tractor not two months ago.
+
+-> So what happened?
+	Old Man: Seeing as he was drunk, I probably should’ve left him alone. We argued for a couple minutes before he walked off.
+	Old Man: Then I went up to <bar>, and I ran into Levi outside.
+-> Did Levi happen to walk by?
+	Old Man: No, but I did run into him after I was done arguing with Charlie. He was just outside the door at <bar>.
+
+-> You’re guilty that Charlie died right after that?
+	Old Man: I know it’s not my fault. A man’s got to be responsible for his own actions.
+	Old Man: But I do feel awful thinking that’s probably the last conversation he had before he died.
+	[[NoGuiltyOption]]
+-> Say ten Hail Marys and you’ll be forgiven.
+	Old Man: I suppose that’s not too high a price. I’ll do that, Father.\
+	[[InvestigationChoiceDay2]]
+-> You don’t need to feel guilty about that.
+	Old Man: It’s kind of you to say so, Father. I’ll just be on my way then.
+	[[InvestigationChoiceDay2]]
 ===
 
-title: Day2Killing
+title: NoGuiltyOption
 ---
+-> Say ten Hail Marys and you’ll be forgiven.
+	Old Man: I suppose that’s not too high a price. I’ll do that, Father.\
+	[[InvestigationChoiceDay2]]
+-> You don’t need to feel guilty about that.
+	Old Man: It’s kind of you to say so, Father. I’ll just be on my way then.
+	[[InvestigationChoiceDay2]]
+===
+
+title: InvestigationChoiceDay2
+---
+[[The times for Levi leaving the bar don’t add up. (Visit bar)|Day2Bar]]
+[[Sounds like Levi bought the tractor from Charlie (Investigate tractor)|Day2Tractor]]
+===
+
+title: Day2Bar
+---
+Notebook: <font="Mansalva-Regular SDF">Talked to bartender at <Bar>. Says he saw Levi exit, wait outside for a few minutes, then leave.</font> #line:062ff94
+<<transition GameManager Day 2>>
+[[Day3]]
 ===
 
 title: Day2Tractor
 ---
+Notebook: <font="Mansalva-Regular SDF">Found tractor serial #. Called John Deere, sales rep says they already denied my return. Charlie tried to return it, <u>knew it was defective?</u></font>
+<<transition GameManager Day 2>>
+[[Day3]]
 ===
