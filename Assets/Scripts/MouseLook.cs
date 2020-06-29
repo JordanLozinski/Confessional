@@ -25,6 +25,7 @@ public class MouseLook : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         GetComponent<SpriteRenderer>().sprite = defaultSprite;
+        StartCoroutine(Timer());
     }
     
     void FixedUpdate()
@@ -43,7 +44,12 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(12f);
+        StartCoroutine(FadeOut());
+    }    
 
     IEnumerator ShootGun()
     {
@@ -53,7 +59,11 @@ public class MouseLook : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = defaultSprite;
         yield return new WaitForSeconds(0.04f);
         shellfallsound.PlayOneShot(shellfallsound.clip);
+        StartCoroutine(FadeOut());
+    }
 
+    IEnumerator FadeOut()
+    {
         fadeImage.SetActive(true);
         Image fadeImageImage = fadeImage.GetComponent<Image>();
         Color tmpa = fadeImageImage.color;
